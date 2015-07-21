@@ -5,8 +5,11 @@ end
 require "../app/controllers/*"
 require "./routes"
 
-
-port = 3000
+if ENV["PORT"]?.nil?
+  port = 3000
+else
+  port = ENV["PORT"].to_i
+end
 handlers = [] of HTTP::Handler
 handlers << HTTP::LogHandler.new
 handlers << Banjo::Handler.new
